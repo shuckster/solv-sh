@@ -66,15 +66,20 @@ convert_sum_to_line()
   IFS=',' read -r start end <<< "$input"
   local result=""
   local i
-  if (( start <= end )); then
-    for (( i=start; i<=end; i++ )); do
-      if (( i != 0 )); then
+  if (( start <= end ))
+  then
+    for (( i=start; i<=end; i++ ))
+    do
+      if (( i != 0 ))
+      then
         result+="LINE:$(printf '%+d' $i) + "
       fi
     done
   else
-    for (( i=start; i>=end; i-- )); do
-      if (( i != 0 )); then
+    for (( i=start; i>=end; i-- ))
+    do
+      if (( i != 0 ))
+      then
         result+="LINE:$(printf '%+d' $i) + "
       fi
     done
@@ -86,11 +91,13 @@ convert_sum_to_line()
 preprocess_sums ()
 {
   local line="$1"
-  if [ -z "$line" ]; then
+  if [ -z "$line" ]
+  then
       read line
   fi
   local regex="SUM:[-+]?[0-9]+,[-+]?[0-9]+"
-  while [[ $line =~ $regex ]]; do
+  while [[ $line =~ $regex ]]
+  do
     local pattern="${BASH_REMATCH[0]}"
     local replacement=$(convert_sum_to_line "$pattern")
     line="${line//$pattern/$replacement}"
@@ -132,10 +139,12 @@ relative_to_absolute_line ()
   local absolute_line_number=$1
   shift
   local line="$1"
-  if [ -z "$line" ]; then
+  if [ -z "$line" ]
+  then
     read line
   fi
-  while [[ "$line" =~ (LINE:)([+-]?[0-9]+) ]]; do
+  while [[ "$line" =~ (LINE:)([+-]?[0-9]+) ]]
+  do
     adjust=${BASH_REMATCH[2]}
     replacement="_LABS:$((absolute_line_number + adjust))"
     line=${line//${BASH_REMATCH[1]}${BASH_REMATCH[2]}/$replacement}
@@ -228,7 +237,8 @@ do
   do
     current_line_number=$i
     line=${preprocessed_lines[$i]}
-    while [[ "$line" =~ _LABS:([0-9]+) ]]; do
+    while [[ "$line" =~ _LABS:([0-9]+) ]]
+    do
       line_reference=${BASH_REMATCH[1]}
       replacement=${answers_hash[$line_reference]}
       line=${line//_LABS:$line_reference/$replacement}
