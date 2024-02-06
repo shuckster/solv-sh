@@ -55,7 +55,7 @@ SUM tokens above.
 
 As `solv-sh` works with relative line numbers it's especially handy to use
 within Vim: You can pipe a VISUAL selection of calculations to `solv-sh` by
-hitting `!!` on your keyboard and entering the path to the script.
+hitting `!` on your keyboard and entering the path to the script.
 
 ## Credits
 
