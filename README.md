@@ -30,7 +30,7 @@ echo "1 + 1 - (2 * 2)
       SUM:-2,-1" | ./solv.sh
 ```
 
-## Supported syntax:
+## Supported syntax
 
 `solv-sh` essentially tries to make its input
 [bc](https://linux.die.net/man/1/bc) friendly (which it uses internally) while
