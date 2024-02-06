@@ -1,5 +1,7 @@
 #!/bin/bash
 
+solv_version="1.1.0"
+
 example_input="  a simple sum 1 + 1
   let us multiply that result LINE:-1 * 3
   and sum the previous lines SUM:-2,-1
@@ -10,7 +12,7 @@ example_input="  a simple sum 1 + 1
 if [ $# -eq 0 ] && [ -t 0 ]
 then
   echo "
--=[ solv 1.0.0 ]=-----------------------------------------------------------
+-=[ solv ${solv_version} ]=-----------------------------------------------------------
 
 Soulver-like calculator for the command line.
 
@@ -43,7 +45,7 @@ fi
 if test "$1" = "--example"
 then
   echo "
--=[ solv 1.0.0 ]=-----------------------------------------------------------
+-=[ solv ${solv_version} ]=-----------------------------------------------------------
 
 --example
 "
