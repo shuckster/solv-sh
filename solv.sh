@@ -1,19 +1,23 @@
 #!/bin/bash
 
-example_input="  1 + 1
-  LINE:-1 * 3
-  SUM:-2,-1
-  2 - 1 as % of LINE:+2
-  (5 * 2) % off 512
-  10 % of 256"
+example_input="  a simple sum 1 + 1
+  let us multiply that result LINE:-1 * 3
+  and sum the previous lines SUM:-2,-1
+  as a percentage demo 2 - 1 as % of LINE:+2
+  percent off demo (5 * 2) % off 512
+  percent of demo 10 % of 256"
 
 if [ $# -eq 0 ] && [ -t 0 ]
 then
   echo "
 -=[ solv 1.0.0 ]=-----------------------------------------------------------
 
-Soulver-like calculator for the command line. Written by Conan Theobald.
+Soulver-like calculator for the command line.
+
+Written by Conan Theobald:
 - https://github.com/shuckster/solv.sh
+
+Find Soulver here:
 - https://soulver.app/
 
 ----------------------------------------------------------------------------
@@ -25,9 +29,13 @@ $example_input
 
 Run the above with --example
 
-LINE and SUM work with relative line numbers, so LINE:-1 means to replace that
-token with the calculated value of the line before it, and SUM:-2,-1 means to
-replace that token with the sum of the range specified.
+LINE and SUM work with relative line numbers, so LINE:-1 means to replace
+that token with the calculated value of the line before it, and SUM:-2,-1
+means to replace that token with the sum of the range specified.
+
+As you can see, arbitrary text can appear before your expressions (and after
+them too) but try to stick to the basic alphabet: punctuaction characters
+might be seen an interpreted as part of the expression.
 "
   exit
 fi
