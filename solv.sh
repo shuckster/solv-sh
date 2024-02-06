@@ -3,8 +3,8 @@
 example_input="  1 + 1
   LINE:-1 * 3
   SUM:-2,-1
-  1 as % of LINE:+2
-  10 % off 512
+  2 - 1 as % of LINE:+2
+  (5 * 2) % off 512
   10 % of 256"
 
 if [ $# -eq 0 ] && [ -t 0 ]
