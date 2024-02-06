@@ -1,6 +1,8 @@
 # solv-sh
 
-Soulver-like calculator for the command line.
+Soulver-like calculator for the command line, intended for [Vim](#vim).
+
+Latest version: 1.1.0
 
 Usage:
 
