@@ -101,20 +101,28 @@ preprocess_sums ()
 preprocess_percents ()
 {
   local line="$1"
-  if [ -z "$line" ]; then
+  if [ -z "$line" ]
+  then
       read line
   fi
-  if [[ $line == *'as % of'* ]]
+  # Process "as % of"
+  if [[ $line =~ (.*)\ as\ \%\ of\ (.*) ]]
   then
-    line=$(echo "$line" | awk '{print "(100/" $5 ") * " $1}')
-  fi
-  if [[ $line == *'% off'* ]]
+    local expr="${BASH_REMATCH[1]}"
+    local base="${BASH_REMATCH[2]}"
+    line="($expr) * 100 / $base"
+  # Process "% off"
+  elif [[ $line =~ (.*)\%\ off\ (.*) ]]
   then
-    line=$(echo "$line" | awk '{print $4 " - " $4 " * " $1 "/100"}')
-  fi
-  if [[ $line == *'% of'* ]]
+    local percent="${BASH_REMATCH[1]}"
+    local original="${BASH_REMATCH[2]}"
+    line="$original - ($original * $percent / 100)"
+  # Process "% of"
+  elif [[ $line =~ (.*)\%\ of\ (.*) ]]
   then
-    line=$(echo "$line" | awk '{print $4 " * " $1 "/100"}')
+    local percent="${BASH_REMATCH[1]}"
+    local total="${BASH_REMATCH[2]}"
+    line="($total * $percent / 100)"
   fi
   echo "$line"
 }
