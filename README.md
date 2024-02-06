@@ -1,4 +1,4 @@
-# solv.sh
+# solv-sh
 
 Soulver-like calculator for the command line.
 
@@ -17,7 +17,7 @@ LINE:-1 * 2      #= 16
 SUM:-2,-1        #= 24
 ```
 
-You can pass `solv.sh` an input that includes previously generated answers and
+You can pass `solv-sh` an input that includes previously generated answers and
 they will be stripped and recalculated.
 
 
@@ -32,7 +32,7 @@ echo "1 + 1 - (2 * 2)
 
 ## Supported syntax:
 
-`solv.sh` essentially tries to make its input
+`solv-sh` essentially tries to make its input
 [bc](https://linux.die.net/man/1/bc) friendly (which it uses internally) while
 adding support for the following tokens:
 
@@ -51,13 +51,13 @@ SUM tokens above.
 
 ## Vim
 
-As `solv.sh` works with relative line numbers it's especially handy to use
-within Vim: You can pipe a VISUAL selection of calculations to `solv.sh` by
+As `solv-sh` works with relative line numbers it's especially handy to use
+within Vim: You can pipe a VISUAL selection of calculations to `solv-sh` by
 hitting `!!` on your keyboard and entering the path to the script.
 
 ## Credits
 
 - Soulver was written by [these guys](https://soulver.app/). You should buy their app.
-- `solv.sh` was written by [Conan Theobald](https://github.com/shuckster/).
+- `solv-sh` was written by [Conan Theobald](https://github.com/shuckster/).
 
 I hope you found it useful! If so, I like [coffee ☕️](https://www.buymeacoffee.com/shuckster) :)
