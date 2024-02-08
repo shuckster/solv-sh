@@ -7,16 +7,20 @@ Latest version: 1.1.0
 Usage:
 
 ```sh
-./solv.sh "1 + 1 - (2 * 2)
-           LINE:-1 + 10
-           LINE:-1 * 2
-           SUM:-2,-1"
+./solv.sh "a simple sum 1 + 1
+           let us multiply that result LINE:-1 * 3
+           and sum the previous lines SUM:-2,-1
+           as a percentage demo 2 - 1 as % of LINE:+2
+           percent off demo (5 * 2) % off 512
+           percent of demo 10 % of 256"
 
 # Output
-1 + 1 - (2 * 2)  #= -2
-LINE:-1 + 10     #= 8
-LINE:-1 * 2      #= 16
-SUM:-2,-1        #= 24
+a simple sum 1 + 1                          #= 2
+let us multiply that result LINE:-1 * 3     #= 6
+and sum the previous lines SUM:-2,-1        #= 8
+as a percentage demo 2 - 1 as % of LINE:+2  #= 3.90625
+percent off demo (5 * 2) % off 512          #= 460.8
+percent of demo 10 % of 256                 #= 25.6
 ```
 
 You can pass `solv-sh` an input that includes previously generated answers and
