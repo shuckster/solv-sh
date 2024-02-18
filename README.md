@@ -50,7 +50,7 @@ adding support for the following tokens:
 
 Both LINE and SUM work with relative line numbers, so LINE:-1 means to replace
 that token with the calculated value of the line before it, and SUM:-2,-1 means
-to replace that token with the sum of the two previously lines.
+to replace that token with the sum of the two previous lines.
 
 X and Y correspond to any expression you can make with `bc`, plus the LINE and
 SUM tokens above.
