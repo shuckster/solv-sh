@@ -2,7 +2,7 @@
 
 Soulver-like calculator for the command line, intended for [Vim](#vim).
 
-Latest version: 1.1.0
+Latest version: 1.1.1 (2024-03-06)
 
 Usage:
 
