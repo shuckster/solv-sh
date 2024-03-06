@@ -1,4 +1,5 @@
 #!/bin/bash
+shopt -s extglob
 
 solv_version="1.1.0"
 
@@ -156,7 +157,9 @@ relative_to_absolute_line ()
   while [[ "$line" =~ (LINE:)([+-]?[0-9]+) ]]
   do
     adjust=${BASH_REMATCH[2]}
-    replacement="_LABS:$((absolute_line_number + adjust))"
+    replacement=$((absolute_line_number + adjust))
+    replacement=$(printf "%05d" $replacement)
+    replacement="_LABS:$replacement"
     line=${line//${BASH_REMATCH[1]}${BASH_REMATCH[2]}/$replacement}
   done
   echo "$line"
@@ -250,7 +253,9 @@ do
     while [[ "$line" =~ _LABS:([0-9]+) ]]
     do
       line_reference=${BASH_REMATCH[1]}
-      replacement=${answers_hash[$line_reference]}
+      answer_index=${line_reference##+(0)}
+      answer_index=${answer_index:-0}
+      replacement=${answers_hash[$answer_index]}
       line=${line//_LABS:$line_reference/$replacement}
     done
 
