@@ -1,7 +1,7 @@
 #!/bin/bash
 shopt -s extglob
 
-solv_version="1.1.0"
+solv_version="1.1.1"
 
 example_input="  a simple sum 1 + 1
   let us multiply that result LINE:-1 * 3
