@@ -171,7 +171,7 @@ calculate_answer_from_line ()
   answer=$(\
     echo "$line" |\
     sed s/[^[:punct:][:digit:]]//g |\
-    sed s/[=,?]//g |\
+    sed s/[=,?:\|_~\']//g |\
     bc -l 2>/dev/null || echo "-"\
   )
   echo "$answer"
