@@ -185,18 +185,15 @@ strip_trailing_answer ()
   echo "$line"
 }
 
-strip_trailing_zeros ()
+strip_trailing_zeros () 
 {
-  line=$1
-  # Whole number? Trim all trailing zeros
-  if [[ $line == *.* ]]
-  then
-    line=$(echo "$line" | sed 's/\.0*$//')
-  fi
-  # Fraction remaining? Trim its trailing zeros too
-  if [[ $line == *.* ]]
-  then
-    line=$(echo "$line" | sed 's/0*$//')
+  # Remove decimal point and trailing zeros if it's a whole number
+  line=${1%.*}       
+  if [[ $line != "$1" ]]; then
+    # Trim trailing zeros, but keep decimal point if present
+    line=${1%%*(0)}  
+    # Remove the decimal point if it's now redundant
+    line=${line%.}   
   fi
   echo "$line"
 }
