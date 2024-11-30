@@ -101,16 +101,13 @@ convert_sum_to_line()
 
 preprocess_sums ()
 {
-  local line="$1"
-  if [ -z "$line" ]
-  then
-      read line
-  fi
+  read -r line
   local regex="SUM:[-+]?[0-9]+,[-+]?[0-9]+"
   while [[ $line =~ $regex ]]
   do
     local pattern="${BASH_REMATCH[0]}"
-    local replacement=$(convert_sum_to_line "$pattern")
+    local replacement
+    replacement=$(convert_sum_to_line "$pattern")
     line="${line//$pattern/$replacement}"
   done
   echo "$line"
@@ -118,11 +115,7 @@ preprocess_sums ()
 
 preprocess_percents ()
 {
-  local line="$1"
-  if [ -z "$line" ]
-  then
-      read line
-  fi
+  read -r line
   # Process "as % of"
   if [[ $line =~ (.*)\ as\ \%\ of\ (.*) ]]
   then
@@ -152,7 +145,7 @@ relative_to_absolute_line ()
   local line="$1"
   if [ -z "$line" ]
   then
-    read line
+    read -r line
   fi
   while [[ "$line" =~ (LINE:)([+-]?[0-9]+) ]]
   do
@@ -181,6 +174,7 @@ strip_trailing_answer ()
 {
   line=$1
   line=${line%#=*}
+  # shellcheck disable=2001
   line=$(echo "$line" | sed 's/ *$//')
   echo "$line"
 }
@@ -208,14 +202,14 @@ max_line_length=0
 while IFS=$'\n' read -r line
 do
   line=$(strip_trailing_answer "$line")
-  source_lines[$line_count]="$line"
+  source_lines[line_count]="$line"
   preprocessed_line=$(\
     echo "$line" |\
     preprocess_percents |\
     preprocess_sums |\
     relative_to_absolute_line $line_count\
   )
-  preprocessed_lines[$line_count]="$preprocessed_line"
+  preprocessed_lines[line_count]="$preprocessed_line"
   line_count=$((line_count+1))
   if [[ ${#line} -gt $max_line_length ]]
   then
@@ -245,7 +239,7 @@ do
   answers_changed=false
   for i in "${!preprocessed_lines[@]}"
   do
-    current_line_number=$i
+    # current_line_number=$i
     line=${preprocessed_lines[$i]}
     while [[ "$line" =~ _LABS:([0-9]+) ]]
     do
@@ -257,10 +251,10 @@ do
     done
 
     answer=$(calculate_answer_from_line "$line")
-    if [[ ${answers_hash[$i]} != $answer ]]
+    if [[ ${answers_hash[$i]} != "$answer" ]]
     then
       answers_changed=true
-      answers_hash[$i]=$answer
+      answers_hash[i]=$answer
     fi
   done
   if [[ $answers_changed == false ]]
@@ -278,7 +272,7 @@ do
   then
     line=$(pad_to_max "${line}")
     answer=${answers_hash[$i]}
-    echo "$line #= $(strip_trailing_zeros $answer)"
+    echo "$line #= $(strip_trailing_zeros "$answer")"
   else
     echo ""
   fi
