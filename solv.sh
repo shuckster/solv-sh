@@ -96,7 +96,7 @@ convert_sum_to_line()
     done
   fi
   result=${result% + }
-  echo "$result"
+  echo "($result)"
 }
 
 preprocess_sums ()
